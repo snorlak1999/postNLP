@@ -57,6 +57,7 @@ def makeWebhookResult(req):
     #push user id to firebase
     userid = req.get("originalRequest").get("data").get("source").get("userId")
     profile = line_bot_api.get_profile(userid)
+    return "d"
     database = db.reference()
     userp = database.child("user").child(userid)
     userp.update({
