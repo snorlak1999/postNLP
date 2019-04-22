@@ -89,7 +89,7 @@ def makeWebhookResult(req):
         }
     #jika chat biasa
     else:
-        lastM  = userp.child("lastMessage").get()
+        lastM  = userp.child("lastMessage")
         userp.update({
             "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
         })
