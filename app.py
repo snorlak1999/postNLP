@@ -27,10 +27,6 @@ from linebot.models import (
 )
 
 # firebase
-cred = credentials.Certificate("./serviceAccountKey.json")
-firebase_admin.initialize_app(cred,{
-    'databaseURL' : 'https://treat-me-22bff.firebaseio.com/'
-})
 
 
 # Flask app should start in global layout
