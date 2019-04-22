@@ -45,6 +45,7 @@ def sendImg(tipe):
             "type": 4,
             "payload": {
               "line": {
+                "type": "imagemap",
                 "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/anxiety-01.jpg?alt=media&_ignore=",
                 "altText": "Kuesioner",
                 "baseSize": {
