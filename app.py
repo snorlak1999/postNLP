@@ -40,6 +40,28 @@ handler = WebhookHandler('66102e73c1b74719168a8873e307430b')
 @app.route('/webhook', methods=['POST'])
 
 
+def sendImg(tipe):
+    data = {
+            "speech": "",
+            "messages": [
+              {
+                "type": 4,
+                "payload": {
+                  "line": {
+                    "type": "imagemap",
+                    "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".png?alt=media&_ignore=",
+                    "altText": "Kuesioner "+tipe,
+                    "baseSize": {
+                        "width": 1040,
+                        "height": 940
+                    }
+                }
+            }
+        }
+      ]
+    }
+    return data
+
 def webhook():
     req = request.get_json()
     res = makeWebhookResult(req)  
@@ -50,6 +72,8 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     
     return r
+
+
 
 def makeWebhookResult(req):          
     #push user id to firebase
@@ -63,13 +87,7 @@ def makeWebhookResult(req):
 
     #jika parameternya mulai kuesioner
     if req.get("result").get("action") == "mulai-kuesioner":
-        return {
-            "speech": "Anxiety1",
-            "displayText": "Anxiety1",
-            #"data": {},
-            #"contextOut": [],
-            "source": "line"
-        }
+        return sendImg("anxiety-01")
     
     #jika parameternya pertanyaan kuesioner
     elif (str(req.get("result").get("action")).split("-")[0] == "anxiety") or (str(req.get("result").get("action")).split("-")[0] == "depression"):
@@ -80,13 +98,8 @@ def makeWebhookResult(req):
             jenisKuesioner : req.get("result").get("resolvedQuery")
         })
         soal = req.get("result").get("action").split("-")[0]+str(int(req.get("result").get("action").split("-")[1])+1)
-        return {
-            "speech": soal,
-            "displayText": soal,
-            #"data": {},
-            #"contextOut": [],
-            "source": "line"
-        }
+        return sendImg(soal)
+    
     #jika chat biasa
     else:
         lastM  = userp.child("lastMessage").get()
