@@ -89,17 +89,23 @@ def makeWebhookResult(req):
         }
     #jika chat biasa
     else:
-        lastM  = userp.child("lastMessage")
-        userp.update({
-            "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
-        })
+        lastM  = userp.child("lastMessage").get()
+        if lastM!=None:
+            userp.update({
+                "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
+            })
+        else:
+            userp.update({
+                "lastMessage" : req.get("result").get("resolvedQuery")
+            })
+            
     return {
-            "speech": "Chat Lagi",
-            "displayText": "Chat Lagi",
-            #"data": {},
-            #"contextOut": [],
-            "source": "line"
-        }
+        "speech": "Chat Lagi",
+        "displayText": "Chat Lagi",
+        #"data": {},
+        #"contextOut": [],
+        "source": "line"
+    }
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 4040))
