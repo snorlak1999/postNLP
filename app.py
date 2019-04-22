@@ -66,11 +66,5 @@ def makeWebhookResult(req):
     #jika parameternya mulai kuesioner
     if req.get("result").get("action") == "mulai-kuesioner":
         return "Anxiety1"
-
-    #jika chat biasa
-    else:
-        lastM  = userp.child("lastMessage").get()
-        userp.update({
-            "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
-        })
+    
     return "Chat Lagi"
