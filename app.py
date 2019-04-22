@@ -52,13 +52,6 @@ def webhook():
     return r
 
 def makeWebhookResult(req):          
-    return {
-            "speech": "Maaf kak Mina belum terlalu mengerti , mohon gunakan fitur menu yang sudah tersedia dulu",
-            "displayText": "Maaf kak Mina belum terlalu mengerti , mohon gunakan fitur menu yang sudah tersedia dulu",
-            #"data": {},
-            #"contextOut": [],
-            "source": "line"
-        }
     #push user id to firebase
     userid = req.get("originalRequest").get("data").get("source").get("userId")
     profile = line_bot_api.get_profile(userid)
@@ -70,7 +63,13 @@ def makeWebhookResult(req):
 
     #jika parameternya mulai kuesioner
     if req.get("result").get("action") == "mulai-kuesioner":
-        return "Anxiety1"
+        return {
+            "speech": "Anxiety1",
+            "displayText": "Anxiety1",
+            #"data": {},
+            #"contextOut": [],
+            "source": "line"
+        }
     
     #jika parameternya pertanyaan kuesioner
     elif str(req.get("result").get("action")).split("-")[0] == "anxiety" or str(req.get("result").get("action")).split("-")[0] == "depression":
@@ -81,14 +80,26 @@ def makeWebhookResult(req):
             jenisKuesioner : req.get("result").get("resolvedQuery")
         })
         soal = jenisKuesioner+str(int(req.get("result").get("action").split("-")[1])+1)
-        return soal
+        return {
+            "speech": soal,
+            "displayText": soal,
+            #"data": {},
+            #"contextOut": [],
+            "source": "line"
+        }
     #jika chat biasa
     else:
         lastM  = userp.child("lastMessage").get()
         userp.update({
             "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
         })
-    return "Chat Lagi"
+     return {
+            "speech": "Chat Lagi",
+            "displayText": "Chat Lagi",
+            #"data": {},
+            #"contextOut": [],
+            "source": "line"
+        }
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 4040))
