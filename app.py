@@ -93,7 +93,7 @@ def makeWebhookResult(req):
         userp.update({
             "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
         })
-     return {
+    return {
             "speech": "Chat Lagi",
             "displayText": "Chat Lagi",
             #"data": {},
