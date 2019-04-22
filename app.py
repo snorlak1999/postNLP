@@ -72,7 +72,7 @@ def makeWebhookResult(req):
         }
     
     #jika parameternya pertanyaan kuesioner
-    elif str(req.get("result").get("action")).split("-")[0] == "anxiety" or str(req.get("result").get("action")).split("-")[0] == "depression":
+    elif (str(req.get("result").get("action")).split("-")[0] == "anxiety") or (str(req.get("result").get("action")).split("-")[0] == "depression"):
         jenisKuesioner = str(req.get("result").get("action"))
 
         #push hasil ke firebase sesuai pertanyaan
