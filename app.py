@@ -52,8 +52,14 @@ def webhook():
     
     return r
 
-def makeWebhookResult(req):  
-    return "dddd"
+def makeWebhookResult(req):          
+    return {
+            "speech": "Maaf kak Mina belum terlalu mengerti , mohon gunakan fitur menu yang sudah tersedia dulu",
+            "displayText": "Maaf kak Mina belum terlalu mengerti , mohon gunakan fitur menu yang sudah tersedia dulu",
+            #"data": {},
+            #"contextOut": [],
+            "source": "line"
+        }
     #push user id to firebase
     userid = req.get("originalRequest").get("data").get("source").get("userId")
     profile = line_bot_api.get_profile(userid)
