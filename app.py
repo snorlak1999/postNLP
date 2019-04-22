@@ -46,8 +46,8 @@ def sendImg(tipe):
             "payload": {
               "line": {
                 "type": "imagemap",
-                "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/anxiety-01.jpg?alt=media&_ignore=",
-                "altText": "Kuesioner",
+                "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".jpg?alt=media&_ignore=",
+                "altText": "Kuesioner "+tipe,
                 "baseSize": {
                     "width": 1040,
                     "height": 940
@@ -100,7 +100,18 @@ def makeWebhookResult(req):
         userp.update({
             jenisKuesioner : req.get("result").get("resolvedQuery")
         })
-        soal = req.get("result").get("action").split("-")[0]+str(int(req.get("result").get("action").split("-")[1])+1)
+        
+        soal = req.get("result").get("action").split("-")[0]+"-0"+str(int(req.get("result").get("action").split("-")[1])+1)
+        if jenisKuesioner=="anxiety-07":
+            soal="depression-01"
+        if jenisKuesioner=="depression-09":
+            return {
+                "speech": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda",
+                "displayText": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda",
+                #"data": {},
+                #"contextOut": [],
+                "source": "line"
+            }
         return sendImg(soal)
     
     #jika chat biasa
