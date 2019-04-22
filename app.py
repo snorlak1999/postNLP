@@ -38,24 +38,25 @@ line_bot_api = LineBotApi('QiRriK22eidlQYKXbPseOKC9VEoRnR4/Jvo1GMxQMZXkzYoI+wtql
 handler = WebhookHandler('66102e73c1b74719168a8873e307430b')
 
 def sendImg(tipe):
-    data = {
-            "speech": "",
-            "messages": [
-              {
-                "type": 4,
-                "payload": {
-                  "line": {
-                    "type": "imagemap",
-                    "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".png?alt=media&_ignore=",
-                    "altText": "Kuesioner "+tipe,
-                    "baseSize": {
-                        "width": 1040,
-                        "height": 940
-                    }
+    data={
+        "speech": "",
+        "messages": [
+          {
+            "type": 4,
+            "payload": {
+              "line": {
+                "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".png?alt=media&_ignore=",
+                "altText": "Kuesioner "+tipe,
+                "baseSize": {
+                    "width": 1040,
+                    "height": 940
+                },
+                "actions": [                
+                ]
                 }
             }
-        }
-      ]
+          }
+        ]
     }
     return data
 
