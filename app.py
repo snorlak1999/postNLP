@@ -79,7 +79,7 @@ def makeWebhookResult(req):
         userp.update({
             jenisKuesioner : req.get("result").get("resolvedQuery")
         })
-        soal = jenisKuesioner+str(int(req.get("result").get("action").split("-")[1])+1)
+        soal = req.get("result").get("action").split("-")[0]+str(int(req.get("result").get("action").split("-")[1])+1)
         return {
             "speech": soal,
             "displayText": soal,
