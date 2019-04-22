@@ -37,9 +37,6 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('QiRriK22eidlQYKXbPseOKC9VEoRnR4/Jvo1GMxQMZXkzYoI+wtql1HchBjEdAcwSBrkj9RNBrixAyV9C0Rx1/6AXu/DqNwnVOaZ7b+ouBHvLZUM3NNntPFAz4V6O3gjyDElT/8FslyCkuRJVQd3wAdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('66102e73c1b74719168a8873e307430b')
 
-@app.route('/webhook', methods=['POST'])
-
-
 def sendImg(tipe):
     data = {
             "speech": "",
@@ -61,6 +58,10 @@ def sendImg(tipe):
       ]
     }
     return data
+
+
+@app.route('/webhook', methods=['POST'])
+
 
 def webhook():
     req = request.get_json()
