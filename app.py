@@ -4,8 +4,7 @@
 import json
 import os
 import requests
-import datetime
-from datetime import timedelta
+import request
 
 import firebase_admin
 from firebase_admin import credentials
@@ -27,6 +26,10 @@ from linebot.models import (
 )
 
 # firebase
+cred = credentials.Certificate("./serviceAccountKey.json")
+firebase_admin.initialize_app(cred,{
+    'databaseURL' : 'https://treat-me-22bff.firebaseio.com/'
+})
 
 
 # Flask app should start in global layout
