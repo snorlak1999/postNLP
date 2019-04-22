@@ -67,4 +67,27 @@ def makeWebhookResult(req):
     if req.get("result").get("action") == "mulai-kuesioner":
         return "Anxiety1"
     
+    #jika parameternya pertanyaan kuesioner
+    elif str(req.get("result").get("action")).split("-")[0] == "anxiety" or str(req.get("result").get("action")).split("-")[0] == "depression":
+        jenisKuesioner = str(req.get("result").get("action"))
+
+        #push hasil ke firebase sesuai pertanyaan
+        userp.update({
+            jenisKuesioner : req.get("result").get("resolvedQuery")
+        })
+        soal = jenisKuesioner+str(int(req.get("result").get("action").split("-")[1])+1)
+        return soal
+    #jika chat biasa
+    else:
+        lastM  = userp.child("lastMessage").get()
+        userp.update({
+            "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
+        })
     return "Chat Lagi"
+
+if __name__ == '__main__':
+    port = int(os.getenv('PORT', 4040))
+
+    print ("Starting app on port %d" %(port))
+
+    app.run(debug=False, port=port, host='0.0.0.0')
