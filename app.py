@@ -36,8 +36,8 @@ firebase_admin.initialize_app(cred,{
 # Flask app should start in global layout
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('PsfUIymdd+yNhdBGMnctoWVNt6p+n2rX2yVq4OSN1qQeS/gAgxmJqtAiGVDuizXAm5xTKkBohwNmgUDSnOEJw+nb6HTq4WPyh4wiKiWyo21hd6tQ+jGLYsEX1YSbqlaqrnWoMunmTFABnww21+IChwdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('c6d548e7e5a4bf201d4de8fb1c6fe726')
+line_bot_api = LineBotApi('QiRriK22eidlQYKXbPseOKC9VEoRnR4/Jvo1GMxQMZXkzYoI+wtql1HchBjEdAcwSBrkj9RNBrixAyV9C0Rx1/6AXu/DqNwnVOaZ7b+ouBHvLZUM3NNntPFAz4V6O3gjyDElT/8FslyCkuRJVQd3wAdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('66102e73c1b74719168a8873e307430b')
 
 @app.route('/webhook', methods=['POST'])
 
@@ -54,7 +54,6 @@ def webhook():
     return r
 
 def makeWebhookResult(req):  
-    return "ddd"
     #push user id to firebase
     userid = req.get("originalRequest").get("data").get("source").get("userId")
     profile = line_bot_api.get_profile(userid)
