@@ -87,9 +87,31 @@ def makeWebhookResult(req):
     userp.update({
         "name" : profile.display_name
     })
-
+    
     #jika parameternya mulai kuesioner
     if req.get("result").get("action") == "mulai-kuesioner":
+        return {
+            "speech": "Masukan Umur Anda",
+            "displayText": "Masukan Umur Anda",
+            #"data": {},
+            #"contextOut": [],
+            "source": "line"
+        } 
+    
+    #jika parameternya age
+    elif req.get("result").get("action") == "age":
+        try:
+            #validasi umur
+            if int(req.get("result").get("resolvedQuery"))<100 and int(req.get("result").get("resolvedQuery"))>1: 
+                userp.update({
+                    "age" : int(req.get("result").get("resolvedQuery"))
+                })
+            else:
+                userp.update({
+                    "age" : "-"
+                })
+        except Exception as res:
+            print("Error")
         return sendImg("anxiety-01")
     
     #jika parameternya pertanyaan kuesioner
@@ -105,6 +127,25 @@ def makeWebhookResult(req):
         if jenisKuesioner=="anxiety-07":
             soal="depression-01"
         if jenisKuesioner=="depression-09":
+            #read all data
+            dataKuesioner = userp.get()
+            
+            #jumlahAnxienty
+            jumlahAnxiety=0
+            x=1
+            while x<8:
+                jumlahAnxiety = jumlahAnxiety+int(dataKuesioner["anxiety-0"+str(x)])
+                x=x+1
+                
+            #jumlah depression
+            jumlahDepression=0
+            x=1
+            while x<10:
+                jumlahDepression = jumlahDepression+int(dataKuesioner["depression-0"+str(x)])
+                x=x+1
+                
+            #send message ke terapi 
+            line_bot_api.push_message("Ub37a322ee0868d4f3318879e2ae1fb64", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+dataKuesioner["name"]+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Anxiety : "+str(jumlahAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"))
             return {
                 "speech": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda",
                 "displayText": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda",
