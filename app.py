@@ -187,11 +187,34 @@ def makeWebhookResult(req):
                 nilai = 3
             jumlahDepression=jumlahDepression+nilai
                 
+            tipeAnxiety=""
+            if jumlahAnxiety<=5:
+                tipeAnxiety="mild"
+            elif jumlahAnxiety<=10:
+                tipeAnxiety="moderate"
+            elif jumlahAnxiety<=15:
+                tipeAnxiety="moderately severe"
+            elif jumlahAnxiety<=21:
+                tipeAnxiety="sereve depression"
+                
+            tipeDepression=""
+            if jumlahDepression<=4:
+                tipeDepression="Minimal depression"
+            elif jumlahDepression<=9:
+                tipeDepression="Mild depression"
+            elif jumlahDepression<=14:
+                tipeDepression="Moderate depression"
+            elif jumlahDepression<=19:
+                tipeDepression="Moderately severe depression"
+            elif jumlahDepression<=27:
+                tipeDepression="Severe depression"
+            
+            
             #send message ke terapi 
-            #line_bot_api.push_message("Ub37a322ee0868d4f3318879e2ae1fb64", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+dataKuesioner["name"]+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Anxiety : "+str(jumlahAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"))
+            line_bot_api.push_message("Ub37a322ee0868d4f3318879e2ae1fb64", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+str(dataKuesioner["name"])+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Kecemasan : "+str(jumlahAnxiety)+"\n"+"Tipe Kecemasan : "+str(tipeAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"+"Tipe Depression : "+str(tipeDepression)+"\n"))
             return {
-                "speech": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda "+str(jumlahAnxiety),
-                "displayText": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda "+str(jumlahAnxiety),
+                "speech": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda ",
+                "displayText": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda ",
                 #"data": {},
                 #"contextOut": [],
                 "source": "line"
