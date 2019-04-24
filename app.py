@@ -61,6 +61,46 @@ def sendImg(tipe):
     }
     return data
 
+def send2Img(tipe):
+    data={
+        "speech": "",
+        "messages": [
+         {
+            "type": 4,
+            "payload": {
+              "line": {
+                "type": "imagemap",
+                "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/depression-intro.jpg?alt=media&_ignore=",
+                "altText": "depression intro",
+                "baseSize": {
+                  "width": 801,
+                  "height": 450
+                },
+                "actions": [                
+                ]
+                }
+            }
+          }, 
+          {
+            "type": 4,
+            "payload": {
+              "line": {
+                "type": "imagemap",
+                "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".jpg?alt=media&_ignore=",
+                "altText": "Kuesioner "+tipe,
+                "baseSize": {
+                  "width": 801,
+                  "height": 450
+                },
+                "actions": [                
+                ]
+                }
+            }
+          }
+        ]
+    }
+    return data
+
 
 @app.route('/webhook', methods=['POST'])
 
@@ -139,6 +179,7 @@ def makeWebhookResult(req):
         soal = req.get("result").get("action").split("-")[0]+"-0"+str(int(req.get("result").get("action").split("-")[1])+1)
         if jenisKuesioner=="anxiety-07":
             soal="depression-01"
+            return send2Img(soal)
         elif jenisKuesioner=="depression-09":
             #read all data
             dataKuesioner = userp.get()
