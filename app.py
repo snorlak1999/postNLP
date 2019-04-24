@@ -48,10 +48,6 @@ def sendImg(tipe):
                 "type": "imagemap",
                 "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".jpg?alt=media&_ignore=",
                 "altText": "Kuesioner "+tipe,
-                "baseSize": {
-                    "width": 1040,
-                    "height": 940
-                },
                 "actions": [                
                 ]
                 }
