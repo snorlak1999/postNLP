@@ -37,6 +37,28 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('QiRriK22eidlQYKXbPseOKC9VEoRnR4/Jvo1GMxQMZXkzYoI+wtql1HchBjEdAcwSBrkj9RNBrixAyV9C0Rx1/6AXu/DqNwnVOaZ7b+ouBHvLZUM3NNntPFAz4V6O3gjyDElT/8FslyCkuRJVQd3wAdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('66102e73c1b74719168a8873e307430b')
 
+
+def sendPreImg(tipe):
+    data={
+        "speech": "",
+        "messages": [
+          {
+            "type": 4,
+            "payload": {
+              "line": {
+                "type": "imagemap",
+                "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".jpg?alt=media&_ignore=",
+                "altText": "Kuesioner "+tipe,
+                "baseSize": {
+                  "width": 1040,
+                  "height": 584
+                }
+              }
+            }
+          ]
+        }
+    return data
+
 def sendImg(tipe):
     data={}
     if (tipe=="anxiety-01" or tipe=="anxiety-03" or tipe=="anxiety-06" or tipe=="anxiety-07"):
@@ -258,8 +280,48 @@ def send2Img(tipe):
                   "width": 1040,
                   "height": 584
                 },
-                "actions": [                
-                ]
+                "actions": [  
+                        {
+                          "type": "message",
+                          "area": {
+                            "x": 358,
+                            "y": 323,
+                            "width": 158,
+                            "height": 192
+                          },
+                          "text": "A"
+                        },
+                        {
+                          "type": "message",
+                          "area": {
+                            "x": 516,
+                            "y": 321,
+                            "width": 150,
+                            "height": 195
+                          },
+                          "text": "B"
+                        },
+                        {
+                          "type": "message",
+                          "area": {
+                            "x": 666,
+                            "y": 319,
+                            "width": 150,
+                            "height": 199
+                          },
+                          "text": "C"
+                        },
+                        {
+                          "type": "message",
+                          "area": {
+                            "x": 816,
+                            "y": 326,
+                            "width": 152,
+                            "height": 192
+                          },
+                          "text": "D"
+                        }
+                    ]
                 }
             }
           }
@@ -332,19 +394,19 @@ def makeWebhookResult(req):
         
         #untuk menampilkan yang pre 02
         if(jenisKuesioner=="depression-01"):
-            return sendImg("depression-pre-02")
+            return sendPreImg("depression-pre-02")
         
         #untuk menampilkan yang pre 04
         if(jenisKuesioner=="depression-03"):
-            return sendImg("depression-pre-04")
+            return sendPreImg("depression-pre-04")
         
         #untuk menampilkan yang pre 05
         if(jenisKuesioner=="depression-04"):
-            return sendImg("depression-pre-05")
+            return sendPreImg("depression-pre-05")
         
-        #untuk menampilkan yang pre 05
+        #untuk menampilkan yang pre 09
         if(jenisKuesioner=="depression-08"):
-            return sendImg("depression-pre-09")
+            return sendPreImg("depression-pre-09")
         
         soal = req.get("result").get("action").split("-")[0]+"-0"+str(int(req.get("result").get("action").split("-")[1])+1)
         if jenisKuesioner=="anxiety-07":
