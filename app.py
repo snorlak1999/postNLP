@@ -37,7 +37,69 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('QiRriK22eidlQYKXbPseOKC9VEoRnR4/Jvo1GMxQMZXkzYoI+wtql1HchBjEdAcwSBrkj9RNBrixAyV9C0Rx1/6AXu/DqNwnVOaZ7b+ouBHvLZUM3NNntPFAz4V6O3gjyDElT/8FslyCkuRJVQd3wAdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('66102e73c1b74719168a8873e307430b')
 
-
+def sendPre(tipe):
+    data=  {
+            "speech": "",
+            "messages": [
+            {
+            "type": 4,
+            "payload": {
+              "line": {
+                "type": "imagemap",
+                "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".jpg?alt=media&_ignore=",
+                "altText": "Kuesioner "+tipe,
+                "baseSize": {
+                  "width": 1040,
+                  "height": 584
+                },
+                "actions": [  
+                        {
+                          "type": "message",
+                          "area": {
+                            "x": 358,
+                            "y": 323,
+                            "width": 158,
+                            "height": 192
+                          },
+                          "text": "A"
+                        },
+                        {
+                          "type": "message",
+                          "area": {
+                            "x": 516,
+                            "y": 321,
+                            "width": 150,
+                            "height": 195
+                          },
+                          "text": "B"
+                        },
+                        {
+                          "type": "message",
+                          "area": {
+                            "x": 666,
+                            "y": 319,
+                            "width": 150,
+                            "height": 199
+                          },
+                          "text": "C"
+                        },
+                        {
+                          "type": "message",
+                          "area": {
+                            "x": 816,
+                            "y": 326,
+                            "width": 152,
+                            "height": 192
+                          },
+                          "text": "D"
+                        }
+                    ]
+                }
+            }
+          }
+        ]
+    }
+    return data
 
 
 def sendImg(tipe):
