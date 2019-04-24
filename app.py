@@ -39,7 +39,7 @@ handler = WebhookHandler('66102e73c1b74719168a8873e307430b')
 
 
 
-def sendPreImg(tipe):
+def sendPre(tipe):
     data=  {
             "type": 4,
             "payload": {
@@ -434,19 +434,19 @@ def makeWebhookResult(req):
         
         #untuk menampilkan yang pre 02
         if(jenisKuesioner=="depression-01"):
-            return sendPreImg("depression-pre-02")
+            return sendPre("depression-pre-02")
         
         #untuk menampilkan yang pre 04
         if(jenisKuesioner=="depression-03"):
-            return sendPreImg("depression-pre-04")
+            return sendPre"depression-pre-04")
         
         #untuk menampilkan yang pre 05
         if(jenisKuesioner=="depression-04"):
-            return sendPreImg("depression-pre-05")
+            return sendPre("depression-pre-05")
         
         #untuk menampilkan yang pre 09
         if(jenisKuesioner=="depression-08"):
-            return sendPreImg("depression-pre-09")
+            return sendPre("depression-pre-09")
         
         soal = req.get("result").get("action").split("-")[0]+"-0"+str(int(req.get("result").get("action").split("-")[1])+1)
         if jenisKuesioner=="anxiety-07":
