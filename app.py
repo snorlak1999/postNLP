@@ -405,7 +405,7 @@ def makeWebhookResult(req):
             usName = str(us.child("name").get())
             myName = str(userp.child("name").get())
             
-            if(str(userp.child("stat").get())=="2"):
+            if(str(userp.child("stat").get())!="2"):
                 return {
                     "speech": "Maaf kamu bukan konselor",
                     "displayText": "Maaf kamu bukan konselor",
