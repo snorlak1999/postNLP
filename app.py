@@ -189,13 +189,13 @@ def makeWebhookResult(req):
                 
             tipeAnxiety=""
             if jumlahAnxiety<=5:
-                tipeAnxiety="mild"
+                tipeAnxiety="Mild"
             elif jumlahAnxiety<=10:
-                tipeAnxiety="moderate"
+                tipeAnxiety="Moderate"
             elif jumlahAnxiety<=15:
-                tipeAnxiety="moderately severe"
+                tipeAnxiety="Moderately severe"
             elif jumlahAnxiety<=21:
-                tipeAnxiety="sereve depression"
+                tipeAnxiety="Sereve depression"
                 
             tipeDepression=""
             if jumlahDepression<=4:
@@ -211,7 +211,8 @@ def makeWebhookResult(req):
             
             
             #send message ke terapi 
-            line_bot_api.push_message("U54ae4a2c42d9dedf8794dd38ec51ca6c", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+str(dataKuesioner["name"])+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Kecemasan : "+str(jumlahAnxiety)+"\n"+"Tipe Kecemasan : "+str(tipeAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"+"Tipe Depression : "+str(tipeDepression)+"\n"))
+            line_bot_api.push_message("Uaca57b61e4320866aa0ebe139ea64c40", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+str(dataKuesioner["name"])+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Kecemasan : "+str(jumlahAnxiety)+"\n"+"Tipe Kecemasan : "+str(tipeAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"+"Tipe Depression : "+str(tipeDepression)+"\n"))
+            
             return {
                 "speech": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda ",
                 "displayText": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda ",
