@@ -144,24 +144,25 @@ def makeWebhookResult(req):
             dataKuesioner = userp.get()
             
             #jumlahAnxienty
-            jumlahAnxiety=0
+            jumlahAnxiety=""
             x=1
             while x<8:
-                jumlahAnxiety = jumlahAnxiety+int(dataKuesioner["anxiety-0"+str(x)])
+                jumlahAnxiety = jumlahAnxiety+dataKuesioner["anxiety-0"+str(x)]
                 x=x+1
                 
             #jumlah depression
-            jumlahDepression=0
+            jumlahDepression=""
             x=1
-            while x<10:
-                jumlahDepression = jumlahDepression+int(dataKuesioner["depression-0"+str(x)])
+            while x<9:
+                jumlahDepression = jumlahDepression+dataKuesioner["depression-0"+str(x)]
                 x=x+1
+            jumlahDepression=jumlahDepression+dataKuesioner["depression-09"]
                 
             #send message ke terapi 
-            line_bot_api.push_message("Ub37a322ee0868d4f3318879e2ae1fb64", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+dataKuesioner["name"]+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Anxiety : "+str(jumlahAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"))
+            #line_bot_api.push_message("Ub37a322ee0868d4f3318879e2ae1fb64", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+dataKuesioner["name"]+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Anxiety : "+str(jumlahAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"))
             return {
-                "speech": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda",
-                "displayText": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda",
+                "speech": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda "+jumlahAnxiety,
+                "displayText": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda "+jumlahAnxiety,
                 #"data": {},
                 #"contextOut": [],
                 "source": "line"
