@@ -386,11 +386,11 @@ def makeWebhookResult(req):
             lastM  = userp.child("lastMessage").get()
             if lastM!=None:
                 userp.update({
-                    "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
+                    "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")+"."
                 })
             else:
                 userp.update({
-                    "lastMessage" : req.get("result").get("resolvedQuery")
+                    "lastMessage" : req.get("result").get("resolvedQuery")+"."
                 })
             line_bot_api.push_message(str(conn), TextSendMessage(text=str(req.get("result").get("resolvedQuery"))))
             return "Sukses"
