@@ -117,11 +117,24 @@ def makeWebhookResult(req):
     #jika parameternya pertanyaan kuesioner
     elif (str(req.get("result").get("action")).split("-")[0] == "anxiety") or (str(req.get("result").get("action")).split("-")[0] == "depression"):
         jenisKuesioner = str(req.get("result").get("action"))
-
+        
         #push hasil ke firebase sesuai pertanyaan
         userp.update({
             jenisKuesioner : req.get("result").get("resolvedQuery")
         })
+        
+        
+        #untuk menampilkan yang pre 02
+        if(jenisKuesioner=="depression-01"):
+            return sendImg("depression-Pre-02")
+        
+        #untuk menampilkan yang pre 04
+        if(jenisKuesioner=="depression-03"):
+            return sendImg("depression-Pre-04")
+        
+        #untuk menampilkan yang pre 05
+        if(jenisKuesioner=="depression-04"):
+            return sendImg("depression-Pre-05")
         
         soal = req.get("result").get("action").split("-")[0]+"-0"+str(int(req.get("result").get("action").split("-")[1])+1)
         if jenisKuesioner=="anxiety-07":
