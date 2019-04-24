@@ -139,7 +139,7 @@ def makeWebhookResult(req):
         soal = req.get("result").get("action").split("-")[0]+"-0"+str(int(req.get("result").get("action").split("-")[1])+1)
         if jenisKuesioner=="anxiety-07":
             soal="depression-01"
-        if jenisKuesioner=="depression-09":
+        elif jenisKuesioner=="depression-09":
             #read all data
             dataKuesioner = userp.get()
             
