@@ -176,6 +176,10 @@ def makeWebhookResult(req):
         if(jenisKuesioner=="depression-04"):
             return sendImg("depression-pre-05")
         
+        #untuk menampilkan yang pre 05
+        if(jenisKuesioner=="depression-08"):
+            return sendImg("depression-pre-09")
+        
         soal = req.get("result").get("action").split("-")[0]+"-0"+str(int(req.get("result").get("action").split("-")[1])+1)
         if jenisKuesioner=="anxiety-07":
             soal="depression-01"
