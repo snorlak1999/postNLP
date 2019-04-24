@@ -398,7 +398,7 @@ def makeWebhookResult(req):
     #jika parameternya connect 
     if req.get("result").get("action") == "connect":
         try:
-            reqConnect = str(req.get("result").get("resolvedQuery")).split("##")[1]
+            reqConnect = str(req.get("result").get("resolvedQuery")).split(" ")[1]
           
             us = database.child("user").child(reqConnect)
             
@@ -406,7 +406,7 @@ def makeWebhookResult(req):
             myName = str(userp.child("name").get())
             
             #validasi apakah user telah terhubung ke yang lain
-            if (str(us.child("connect").get())==None):
+            if (str(us.child("connect").get())!=None):
                 return {
                     "speech": "Maaf "+usName+" telah terhubung ke yang lain",
                     "displayText": "Maaf "+usName+" telah terhubung ke yang lain",
