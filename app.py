@@ -581,7 +581,8 @@ def makeWebhookResult(req):
                     stat= val["stat"]
                     #push message jika User memiliki lastMessage
                     if str(stat)=="2":
-                        line_bot_api.push_message(key, TextSendMessage(text="Calon Pasien : \n"+"Nama : "+str(dataKuesioner["name"])+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Kecemasan : "+str(jumlahAnxiety)+"\n"+"Tipe Kecemasan : "+str(tipeAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"+"Tipe Depression : "+str(tipeDepression)+"\n\n\nUntuk menghubungkan balas dengan\n"+"#connect "+str(userid)))
+                        line_bot_api.push_message(key, TextSendMessage(text="Calon Pasien : \n"+"Nama : "+str(dataKuesioner["name"])+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Kecemasan : "+str(jumlahAnxiety)+"\n"+"Tipe Kecemasan : "+str(tipeAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"+"Tipe Depression : "+str(tipeDepression)+"\n\n\nUntuk menghubungkan balas dengan\n"))
+                        line_bot_api.push_message(key, TextSendMessage(text="#connect "+str(userid)))
                         
                 except Exception as res:
                     print("Error")
