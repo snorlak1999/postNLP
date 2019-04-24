@@ -406,7 +406,7 @@ def makeWebhookResult(req):
             myName = str(userp.child("name").get())
             
             #validasi apakah user telah terhubung ke yang lain
-            if (str(us.child("connect").get())!=None):
+            if (us.child("connect").get()!=None):
                 return {
                     "speech": "Maaf "+usName+" telah terhubung ke yang lain",
                     "displayText": "Maaf "+usName+" telah terhubung ke yang lain",
