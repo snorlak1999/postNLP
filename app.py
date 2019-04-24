@@ -144,19 +144,48 @@ def makeWebhookResult(req):
             dataKuesioner = userp.get()
             
             #jumlahAnxienty
-            jumlahAnxiety=""
+            jumlahAnxiety=0
             x=1
             while x<8:
-                jumlahAnxiety = jumlahAnxiety+dataKuesioner["anxiety-0"+str(x)]
+                nilai=0
+                if dataKuesioner["anxiety-0"+str(x)].lower()=="a":
+                    nilai = 0
+                elif dataKuesioner["anxiety-0"+str(x)].lower()=="b":
+                    nilai = 1
+                elif dataKuesioner["anxiety-0"+str(x)].lower()=="c":
+                    nilai = 2
+                elif dataKuesioner["anxiety-0"+str(x)].lower()=="d":
+                    nilai = 3
+                jumlahAnxiety = jumlahAnxiety+nilai
                 x=x+1
-                
+            
             #jumlah depression
-            jumlahDepression=""
+            jumlahDepression=0
             x=1
             while x<9:
-                jumlahDepression = jumlahDepression+dataKuesioner["depression-0"+str(x)]
+                nilai=0
+                if dataKuesioner["depression-0"+str(x)].lower()=="a":
+                    nilai = 0
+                elif dataKuesioner["depression-0"+str(x)].lower()=="b":
+                    nilai = 1
+                elif dataKuesioner["depression-0"+str(x)].lower()=="c":
+                    nilai = 2
+                elif dataKuesioner["depression-0"+str(x)].lower()=="d":
+                    nilai = 3
+                jumlahDepression = jumlahDepression+nilai
                 x=x+1
-            jumlahDepression=jumlahDepression+dataKuesioner["depression-09"]
+            
+            #last data
+            nilai=0
+            if str(req.get("result").get("resolvedQuery")).lower()=="a":
+                nilai = 0
+            elif str(req.get("result").get("resolvedQuery")).lower()=="b":
+                nilai = 1
+            elif str(req.get("result").get("resolvedQuery")).lower()=="c":
+                nilai = 2
+            elif str(req.get("result").get("resolvedQuery")).lower()=="d":
+                nilai = 3
+            jumlahDepression=jumlahDepression+nilai
                 
             #send message ke terapi 
             #line_bot_api.push_message("Ub37a322ee0868d4f3318879e2ae1fb64", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+dataKuesioner["name"]+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Anxiety : "+str(jumlahAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"))
