@@ -37,7 +37,29 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('QiRriK22eidlQYKXbPseOKC9VEoRnR4/Jvo1GMxQMZXkzYoI+wtql1HchBjEdAcwSBrkj9RNBrixAyV9C0Rx1/6AXu/DqNwnVOaZ7b+ouBHvLZUM3NNntPFAz4V6O3gjyDElT/8FslyCkuRJVQd3wAdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('66102e73c1b74719168a8873e307430b')
 
-
+def sendPre(tipe):
+    data= {
+            "speech": "",
+            "messages": [
+              {
+                "type": 4,
+                "payload": {
+                  "line": {
+                    "type": "imagemap",
+                    "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".jpg?alt=media&_ignore=",
+                    "altText": "Kuesioner "+tipe,
+                    "baseSize": {
+                      "width": 1040,
+                      "height": 584
+                    },
+                    "actions": [
+                    ]
+                  }
+                }
+              }
+            ]
+    }
+    return data
 
 def sendImg(tipe):
     data={}
@@ -377,7 +399,7 @@ def makeWebhookResult(req):
         
         #untuk menampilkan yang pre 04
         if(jenisKuesioner=="depression-03"):
-            return sendPre"depression-pre-04")
+            return sendPre("depression-pre-04")
         
         #untuk menampilkan yang pre 05
         if(jenisKuesioner=="depression-04"):
