@@ -356,11 +356,11 @@ def makeWebhookResult(req):
     userp.update({
         "name" : profile.display_name
     })
-    conn = str(userp.child("connect").get())
+    conn = userp.child("connect").get()
     
     #jika parameternya disconnect
     if req.get("result").get("action") == "disconnect":
-        us = database.child("user").child(conn)
+        us = database.child("user").child(str(conn))
         us.update({
             "connect" : None
         })
@@ -371,7 +371,7 @@ def makeWebhookResult(req):
         usName = str(us.child("name").get())
         myName = str(userp.child("name").get())
         #send ke yang terhubung
-        line_bot_api.push_message(conn, TextSendMessage(text="Maaf kamu telah terputus dari "+myName))
+        line_bot_api.push_message(str(conn), TextSendMessage(text="Maaf kamu telah terputus dari "+myName))
             
         return {
             "speech": "Maaf kamu telah terputus dari "+usName,
@@ -383,7 +383,7 @@ def makeWebhookResult(req):
     
     if conn!=None:
         try:
-            line_bot_api.push_message(conn, TextSendMessage(text=str(req.get("result").get("resolvedQuery"))))
+            line_bot_api.push_message(str(conn), TextSendMessage(text=str(req.get("result").get("resolvedQuery"))))
             return "Sukses"
         except Exception as res:
             return {
