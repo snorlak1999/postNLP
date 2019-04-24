@@ -49,8 +49,8 @@ def sendImg(tipe):
                 "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".jpg?alt=media&_ignore=",
                 "altText": "Kuesioner "+tipe,
                 "baseSize": {
-                  "width": 801,
-                  "height": 450
+                  "width": 1040,
+                  "height": 584
                 },
                 "actions": [                
                 ]
@@ -73,8 +73,8 @@ def send2Img(tipe):
                 "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/depression-intro.jpg?alt=media&_ignore=",
                 "altText": "depression intro",
                 "baseSize": {
-                  "width": 801,
-                  "height": 450
+                  "width": 1040,
+                  "height": 584
                 },
                 "actions": [                
                 ]
@@ -89,8 +89,8 @@ def send2Img(tipe):
                 "baseUrl": "https://firebasestorage.googleapis.com/v0/b/treat-me-22bff.appspot.com/o/"+tipe+".jpg?alt=media&_ignore=",
                 "altText": "Kuesioner "+tipe,
                 "baseSize": {
-                  "width": 801,
-                  "height": 450
+                  "width": 1040,
+                  "height": 584
                 },
                 "actions": [                
                 ]
