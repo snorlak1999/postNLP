@@ -253,10 +253,11 @@ def makeWebhookResult(req):
             
             #send message ke terapi 
             line_bot_api.push_message("Uaca57b61e4320866aa0ebe139ea64c40", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+str(dataKuesioner["name"])+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Kecemasan : "+str(jumlahAnxiety)+"\n"+"Tipe Kecemasan : "+str(tipeAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"+"Tipe Depression : "+str(tipeDepression)+"\n"))
-            
+            thanks = "Terima kasih udah dengerin cerita Meeta! \nEhh!! Ternyata tahap assessment sudah selesai loh!! Yeay \(’-’ )/ \nSekarang, Meeta mau nyariin kamu ahli kesehatan paling bagus yang ada disekitar kamu\n\n\nNanti.. Meeta kabarin ya kalau udah ketemu, sampai nanti."
+
             return {
-                "speech": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda ",
-                "displayText": "Terima Kasih Sudah Mengikuti Kuesioner ini , sesaat lagi anda dapat memulai sesi terapi anda ",
+                "speech": thanks,
+                "displayText": thanks,
                 #"data": {},
                 #"contextOut": [],
                 "source": "line"
