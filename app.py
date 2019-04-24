@@ -131,8 +131,8 @@ def makeWebhookResult(req):
     #jika parameternya mulai kuesioner
     if req.get("result").get("action") == "mulai-kuesioner":
         return {
-            "speech": "Masukan Umur Anda",
-            "displayText": "Masukan Umur Anda",
+            "speech": "Usia kamu berapa? ",
+            "displayText": "Usia kamu berapa? ",
             #"data": {},
             #"contextOut": [],
             "source": "line"
@@ -277,8 +277,8 @@ def makeWebhookResult(req):
             })
             
     return {
-        "speech": "Chat Lagi",
-        "displayText": "Chat Lagi",
+        "speech": "Masukan kamu salah silahkan kirim lagi",
+        "displayText": "Masukan kamu salah silahkan kirim lagi",
         #"data": {},
         #"contextOut": [],
         "source": "line"
