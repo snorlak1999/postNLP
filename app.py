@@ -383,6 +383,15 @@ def makeWebhookResult(req):
     
     if conn!=None:
         try:
+            lastM  = userp.child("lastMessage").get()
+            if lastM!=None:
+                userp.update({
+                    "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
+                })
+            else:
+                userp.update({
+                    "lastMessage" : req.get("result").get("resolvedQuery")
+                })
             line_bot_api.push_message(str(conn), TextSendMessage(text=str(req.get("result").get("resolvedQuery"))))
             return "Sukses"
         except Exception as res:
@@ -607,24 +616,14 @@ def makeWebhookResult(req):
         return sendImg(soal)
     
     #jika chat biasa
-    else:
-        lastM  = userp.child("lastMessage").get()
-        if lastM!=None:
-            userp.update({
-                "lastMessage" : lastM+" "+req.get("result").get("resolvedQuery")
-            })
-        else:
-            userp.update({
-                "lastMessage" : req.get("result").get("resolvedQuery")
-            })
-            
-    return {
-        "speech": "Masukan kamu salah silahkan kirim lagi",
-        "displayText": "Masukan kamu salah silahkan kirim lagi",
-        #"data": {},
-        #"contextOut": [],
-        "source": "line"
-    }
+    else:    
+        return {
+            "speech": "Masukan kamu salah silahkan kirim lagi",
+            "displayText": "Masukan kamu salah silahkan kirim lagi",
+            #"data": {},
+            #"contextOut": [],
+            "source": "line"
+        }
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 4040))
