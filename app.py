@@ -148,13 +148,13 @@ def makeWebhookResult(req):
             x=1
             while x<8:
                 nilai=0
-                if dataKuesioner["anxiety-0"+str(x)].lower()=="a":
+                if str(dataKuesioner["anxiety-0"+str(x)]).lower()=="a":
                     nilai = 0
-                elif dataKuesioner["anxiety-0"+str(x)].lower()=="b":
+                elif str(dataKuesioner["anxiety-0"+str(x)]).lower()=="b":
                     nilai = 1
-                elif dataKuesioner["anxiety-0"+str(x)].lower()=="c":
+                elif str(dataKuesioner["anxiety-0"+str(x)]).lower()=="c":
                     nilai = 2
-                elif dataKuesioner["anxiety-0"+str(x)].lower()=="d":
+                elif str(dataKuesioner["anxiety-0"+str(x)]).lower()=="d":
                     nilai = 3
                 jumlahAnxiety = jumlahAnxiety+nilai
                 x=x+1
@@ -164,13 +164,13 @@ def makeWebhookResult(req):
             x=1
             while x<9:
                 nilai=0
-                if dataKuesioner["depression-0"+str(x)].lower()=="a":
+                if str(dataKuesioner["depression-0"+str(x)]).lower()=="a":
                     nilai = 0
-                elif dataKuesioner["depression-0"+str(x)].lower()=="b":
+                elif str(dataKuesioner["depression-0"+str(x)]).lower()=="b":
                     nilai = 1
-                elif dataKuesioner["depression-0"+str(x)].lower()=="c":
+                elif str(dataKuesioner["depression-0"+str(x)]).lower()=="c":
                     nilai = 2
-                elif dataKuesioner["depression-0"+str(x)].lower()=="d":
+                elif str(dataKuesioner["depression-0"+str(x)]).lower()=="d":
                     nilai = 3
                 jumlahDepression = jumlahDepression+nilai
                 x=x+1
