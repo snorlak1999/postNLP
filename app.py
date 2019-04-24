@@ -362,9 +362,11 @@ def makeWebhookResult(req):
     if req.get("result").get("action") == "disconnect":
         us = database.child("user").child(str(conn))
         us.update({
+            "lastMessage" : None,
             "connect" : None
         })
         userp.update({
+            "lastMessage" : None,
             "connect" : None
         })
         
