@@ -374,8 +374,8 @@ def makeWebhookResult(req):
         line_bot_api.push_message(str(conn), TextSendMessage(text="Maaf kamu telah terputus dari "+myName))
             
         return {
-            "speech": "Maaf kamu telah terputus dari "+usName,
-            "displayText": "Maaf kamu telah terputus dari "+usName,
+            "speech": "Kamu telah terputus dari "+usName,
+            "displayText": "Kamu telah terputus dari "+usName,
             #"data": {},
             #"contextOut": [],
             "source": "line"
