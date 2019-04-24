@@ -572,8 +572,19 @@ def makeWebhookResult(req):
                 tipeDepression="Severe depression"
             
             
-            #send message ke terapi 
-            line_bot_api.push_message("Uaca57b61e4320866aa0ebe139ea64c40", TextSendMessage(text="Calon Pasien : \n"+"Nama : "+str(dataKuesioner["name"])+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Kecemasan : "+str(jumlahAnxiety)+"\n"+"Tipe Kecemasan : "+str(tipeAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"+"Tipe Depression : "+str(tipeDepression)+"\n"))
+            #mengirimkan data ke semua konselor
+            user = database.child("user")
+            snapshot = user.order_by_key().get()
+            #key = userId Line
+            for key, val in snapshot.items():
+                try:
+                    stat= val["stat"]
+                    #push message jika User memiliki lastMessage
+                    if str(stat)=="2":
+                        line_bot_api.push_message(key, TextSendMessage(text="Calon Pasien : \n"+"Nama : "+str(dataKuesioner["name"])+"\n"+"Umur : "+str(dataKuesioner["age"])+"\n"+"Nilai Kecemasan : "+str(jumlahAnxiety)+"\n"+"Tipe Kecemasan : "+str(tipeAnxiety)+"\n"+"Nilai Depression : "+str(jumlahDepression)+"\n"+"Tipe Depression : "+str(tipeDepression)+"\n\n\nUntuk menghubungkan balas dengan\n"+"#connect "+str(userid)))
+                        
+                except Exception as res:
+                    print("Error")
             thanks = "Terima kasih udah dengerin cerita Meeta! \nEhh!! Ternyata tahap assessment sudah selesai loh!! Yeay \(’-’ )/ \nSekarang, Meeta mau nyariin kamu ahli kesehatan paling bagus yang ada disekitar kamu\n\n\nNanti.. Meeta kabarin ya kalau udah ketemu, sampai nanti."
 
             return {
