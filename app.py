@@ -356,7 +356,95 @@ def makeWebhookResult(req):
     userp.update({
         "name" : profile.display_name
     })
+    conn = str(userp.child("connect").get())
     
+    #jika parameternya disconnect
+    if req.get("result").get("action") == "disconnect":
+        us = database.child("user").child(conn)
+        us.update({
+            "connect" : None
+        })
+        userp.update({
+            "connect" : None
+        })
+        
+        usName = str(us.child("name").get())
+        myName = str(userp.child("name").get())
+        #send ke yang terhubung
+        line_bot_api.push_message(conn, TextSendMessage(text="Maaf kamu telah terputus dari "+myName))
+            
+        return {
+            "speech": "Maaf kamu telah terputus dari "+usName,
+            "displayText": "Maaf kamu telah terputus dari "+usName,
+            #"data": {},
+            #"contextOut": [],
+            "source": "line"
+        }
+    
+    if conn!=None:
+        try:
+            line_bot_api.push_message(conn, TextSendMessage(text=str(req.get("result").get("resolvedQuery"))))
+            return "Sukses"
+        except Exception as res:
+            return {
+                "speech": "Maaf kamu gagal mengirimkan pesan, coba lagi",
+                "displayText": "Maaf kamu gagal mengirinkan pesan, coba lagi",
+                #"data": {},
+                #"contextOut": [],
+                "source": "line"
+            } 
+    
+    
+    #jika parameternya connect 
+    if req.get("result").get("action") == "connect":
+        try:
+            reqConnect = str(req.get("result").get("resolvedQuery")).split("##")[1]
+          
+            us = database.child("user").child(reqConnect)
+            
+            usName = str(us.child("name").get())
+            myName = str(userp.child("name").get())
+            
+            #validasi apakah user telah terhubung ke yang lain
+            if (str(us.child("connect").get())==None):
+                return {
+                    "speech": "Maaf "+usName+" telah terhubung ke yang lain",
+                    "displayText": "Maaf "+usName+" telah terhubung ke yang lain",
+                    #"data": {},
+                    #"contextOut": [],
+                    "source": "line"
+                } 
+            
+            #mengupdate status connect ke konselor
+            userp.update({
+                "connect" : reqConnect
+            })
+            us.update({
+                "connect" : userid
+            })
+           
+            
+            #send ke yang terhubung
+            line_bot_api.push_message(reqConnect, TextSendMessage(text="Yeayy , Kamu telah terhubung dengan "+myName+"\nAnda langsung dapat chattingan disini \nReply (#Disconnect) untuk disconnect"))
+            
+            return {
+                "speech": "Yeayy , Kamu telah terhubung ke "+usName+"\nReply (#Disconnect) untuk disconnect",
+                "displayText": "Yeayy , Kamu telah terhubung ke "+usName+"\nReply (#Disconnect) untuk disconnect",
+                #"data": {},
+                #"contextOut": [],
+                "source": "line"
+            } 
+        
+        except Exception as res:
+            return {
+                "speech": "Maaf kamu gagal menghubungkan",
+                "displayText": "Maaf kamu gagal menghubungkan",
+                #"data": {},
+                #"contextOut": [],
+                "source": "line"
+            } 
+        
+            
     #jika parameternya mulai kuesioner
     if req.get("result").get("action") == "mulai-kuesioner":
         return {
